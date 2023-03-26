@@ -3,26 +3,26 @@ const desktopMenu = document.querySelector('.desktop-menu');
 const menuHamIcon = document.querySelector('.menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const menuCartIcon = document.querySelector('.navbar-shopping-cart')
-const aside = document.querySelector('.product-detail')
+const shoppingCartContainer = document.querySelector('#shopping-cart-container')
 const cardsContainer = document.querySelector('.cards-container')
 
 const INACTIVE = 'inactive'
 
 
 const toggleDesktopMenu = () => {
-    const isAsideOpen = !aside.classList.contains(INACTIVE)
+    const isAsideOpen = !shoppingCartContainer.classList.contains(INACTIVE)
     
     if(isAsideOpen){
-      aside.classList.add(INACTIVE)  
+      shoppingCartContainer.classList.add(INACTIVE)  
     }
     desktopMenu.classList.toggle(INACTIVE)
 }
 
 const toggleMovileMenu = () => {
-    const isAsideOpen = !aside.classList.contains(INACTIVE)
+    const isAsideOpen = !shoppingCartContainer.classList.contains(INACTIVE)
     
     if(isAsideOpen){
-      aside.classList.add(INACTIVE)  
+      shoppingCartContainer.classList.add(INACTIVE)  
     }
     mobileMenu.classList.toggle(INACTIVE)
 }
@@ -39,9 +39,41 @@ const  toggleCartAside = () => {
         desktopMenu.classList.add(INACTIVE)
     }
 
-    aside.classList.toggle(INACTIVE)
+    shoppingCartContainer.classList.toggle(INACTIVE)
 }
 
+const renderProducts = (productsList) => {
+    for (product of productsList){
+        const productCard = document.createElement('div')
+        productCard.classList.add('product-card')
+    
+        const productImg = document.createElement('img')
+        productImg.setAttribute('src', product.image)
+        
+        const productInfo = document.createElement('div')
+        productInfo.classList.add('product-info')
+    
+        const productInfoDiv = document.createElement('div')
+    
+        const productPrice = document.createElement('p')
+        const productName = document.createElement('p')
+    
+        productPrice.innerText = `$ ${product.price}`
+        productName.innerText = product.name
+    
+        productInfoDiv.append(productPrice,productName)
+    
+        const productInfoFigure = document.createElement('figure')
+        const productImgCart = document.createElement('img')
+        productImgCart.setAttribute('src', 'assets/icons/bt_add_to_cart.svg')
+    
+        productInfoFigure.appendChild(productImgCart)
+    
+        productInfo.append(productInfoDiv, productInfoFigure)
+        productCard.append(productImg,productInfo)
+        cardsContainer.append(productCard)
+    }
+}
 
 menuEmail.addEventListener('click', toggleDesktopMenu)
 menuHamIcon.addEventListener('click', toggleMovileMenu)
@@ -80,38 +112,4 @@ productsList.push({
 })
 
 
-for (product of productsList){
-    const productCard = document.createElement('div')
-    productCard.classList.add('product-card')
-
-    const productImg = document.createElement('img')
-    productImg.setAttribute('src', product.image)
-    
-    const productInfo = document.createElement('div')
-    productInfo.classList.add('product-info')
-
-    const productInfoDiv = document.createElement('div')
-
-    const productPrice = document.createElement('p')
-    const productName = document.createElement('p')
-
-    productPrice.innerText = `$ ${product.price}`
-    productName.innerText = product.name
-
-    productInfoDiv.appendChild(productPrice)
-    productInfoDiv.appendChild(productName)
-
-    const productInfoFigure = document.createElement('figure')
-    const productImgCart = document.createElement('img')
-    productImgCart.setAttribute('src', 'assets/icons/bt_add_to_cart.svg')
-
-    productInfoFigure.appendChild(productImgCart)
-
-    productInfo.appendChild(productInfoDiv)
-    productInfo.appendChild(productInfoFigure)
-
-    productCard.appendChild(productImg)
-    productCard.appendChild(productInfo)
-
-    cardsContainer.appendChild(productCard)
-}
+renderProducts(productsList)
