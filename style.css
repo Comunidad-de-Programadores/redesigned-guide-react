@@ -72,6 +72,11 @@ nav {
   color: var(--very-light-pink);
   font-size: var(--sm);
   margin-right: 12px;
+  cursor: pointer;
+}
+
+.navbar-email:hover {
+  color: var(--hospital-green);
 }
 
 .navbar-shopping-cart {
@@ -118,7 +123,7 @@ nav {
   position: absolute;
   background-color: var(--white);
   top: 60px;
-  right: 0;
+  right: 50px;
 }
 
 .desktop-menu ul {
