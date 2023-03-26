@@ -3,8 +3,12 @@ const desktopMenu = document.querySelector('.desktop-menu');
 const menuHamIcon = document.querySelector('.menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const menuCartIcon = document.querySelector('.navbar-shopping-cart')
+const productDetailCloseIcon = document.querySelector('.product-detail-close')
+
 const shoppingCartContainer = document.querySelector('#shopping-cart-container')
 const cardsContainer = document.querySelector('.cards-container')
+const productDetailContainer = document.querySelector('#product-detail')
+
 
 const INACTIVE = 'inactive'
 
@@ -24,22 +28,35 @@ const toggleMovileMenu = () => {
     if(isAsideOpen){
       shoppingCartContainer.classList.add(INACTIVE)  
     }
+    closeProductDetailAside()
+
     mobileMenu.classList.toggle(INACTIVE)
 }
 
 const  toggleCartAside = () => {
     const isMobileMenuOpen = !mobileMenu.classList.contains(INACTIVE)
-    const isDesktopMenuOpen = !desktopMenu.classList.contains(INACTIVE)
     
     if(isMobileMenuOpen) {
         mobileMenu.classList.add(INACTIVE)
     }
 
-    if(isDesktopMenuOpen) {
-        desktopMenu.classList.add(INACTIVE)
+    const isProductDetailClose = productDetailContainer.classList.contains(INACTIVE)
+
+    if(!isProductDetailClose){
+        productDetailContainer.classList.add(INACTIVE)
     }
 
+    
     shoppingCartContainer.classList.toggle(INACTIVE)
+}
+
+const openProductDetailAside = () => {
+    shoppingCartContainer.classList.add(INACTIVE)
+    productDetailContainer.classList.remove(INACTIVE)
+}
+
+const closeProductDetailAside = () => {
+    productDetailContainer.classList.add(INACTIVE)
 }
 
 const renderProducts = (productsList) => {
@@ -49,6 +66,7 @@ const renderProducts = (productsList) => {
     
         const productImg = document.createElement('img')
         productImg.setAttribute('src', product.image)
+        productImg.addEventListener('click', openProductDetailAside)
         
         const productInfo = document.createElement('div')
         productInfo.classList.add('product-info')
@@ -75,9 +93,12 @@ const renderProducts = (productsList) => {
     }
 }
 
+
 menuEmail.addEventListener('click', toggleDesktopMenu)
 menuHamIcon.addEventListener('click', toggleMovileMenu)
 menuCartIcon.addEventListener('click', toggleCartAside)
+productDetailCloseIcon.addEventListener('click', closeProductDetailAside)
+
 
 const productsList = []
 productsList.push({
