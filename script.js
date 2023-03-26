@@ -8,14 +8,35 @@ const INACTIVE = 'inactive'
 
 
 const toggleDesktopMenu = () => {
+    const isAsideOpen = !aside.classList.contains(INACTIVE)
+    
+    if(isAsideOpen){
+      aside.classList.add(INACTIVE)  
+    }
     desktopMenu.classList.toggle(INACTIVE)
 }
 
 const toggleMovileMenu = () => {
+    const isAsideOpen = !aside.classList.contains(INACTIVE)
+    
+    if(isAsideOpen){
+      aside.classList.add(INACTIVE)  
+    }
     mobileMenu.classList.toggle(INACTIVE)
 }
 
 const  toggleCartAside = () => {
+    const isMobileMenuOpen = !mobileMenu.classList.contains(INACTIVE)
+    const isDesktopMenuOpen = !desktopMenu.classList.contains(INACTIVE)
+    
+    if(isMobileMenuOpen) {
+        mobileMenu.classList.add(INACTIVE)
+    }
+
+    if(isDesktopMenuOpen) {
+        desktopMenu.classList.add(INACTIVE)
+    }
+
     aside.classList.toggle(INACTIVE)
 }
 

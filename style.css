@@ -149,8 +149,9 @@ nav {
 /* Menu en movile */
 .mobile-menu {
   position:absolute;
-  top: 60px;
+  top: 61px;
   padding: 24px;
+  background-color: var(--white);
 }
 
 .mobile-menu a {
@@ -196,6 +197,7 @@ nav {
   position: absolute;
   right: 0;
   box-sizing: border-box;
+  background-color: var(--white);
 }
 
 .title-container {
